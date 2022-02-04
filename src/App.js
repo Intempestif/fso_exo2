@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
-function App() {
+const Button = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
+  )
 }
 
-export default App;
+const App = () => {
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  return (
+    <div className='app'>
+      <div className="app-card">
+        <h1>give your feedback</h1>
+        {/* 3 Button components in the same line */}
+        <Button text='good' handleClick={() => setGood(good + 1)} />
+        <Button text='neutral' handleClick={() => setNeutral(neutral + 1)} />
+        <Button text='bad' handleClick={() => setBad(bad + 1)} />
+        <h2>statistics</h2>
+        <ul>
+          <li>good : {good}</li>
+          <li>neutral : {neutral}</li>
+          <li>bad : {bad}</li>
+          <li>all : {good + neutral + bad}</li>
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+export default App
