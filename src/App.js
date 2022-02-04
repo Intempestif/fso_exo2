@@ -14,6 +14,11 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  // fonction pour arrondir l'entrée
+  const round = (number) => {
+    return Math.round(number * 100) / 100
+  }
+
   return (
     <div className='app'>
       <div className="app-card">
@@ -28,6 +33,10 @@ const App = () => {
           <li>neutral : {neutral}</li>
           <li>bad : {bad}</li>
           <li>all : {good + neutral + bad}</li>
+        
+          <li>average : {round((good - bad) / (good + neutral + bad))}</li>
+          {/* calculer le pourcentage de vote à good avec deux chiffres après la virgule */}
+          <li>positive : {round(good / (good + neutral + bad) * 100)} %</li>
         </ul>
       </div>
     </div>
