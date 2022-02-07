@@ -69,3 +69,7 @@ code {
 
   font-size: 1.2rem;
 }
+
+.app table tbody tr td {
+  padding: 0 .2rem;
+}
