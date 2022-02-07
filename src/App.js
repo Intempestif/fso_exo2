@@ -61,9 +61,10 @@ const Anecdotes = () => {
   // random int between 0 and 6
   const randomNumber = Math.floor(Math.random() * 7)
   const [selectedAnecdote, setSelectedAnecdote] = useState(randomNumber)
+  const [votes, setVotes] = useState([0, 0, 0, 0, 0, 0, 0])
   // console.log(selectedAnecdote)
 
-  const handleClick = () => {
+  const handleClickRandom = () => {
     const lastAnecdote = selectedAnecdote
     const randomNumber = Math.floor(Math.random() * 7)
     if(randomNumber === lastAnecdote) {
@@ -76,11 +77,21 @@ const Anecdotes = () => {
     }
   }
 
+  const handleClickVote = () => {
+    const anecdote = anecdotes[selectedAnecdote]
+    const votescopy = [...votes]
+    console.log(votescopy)
+    votescopy[selectedAnecdote] = votescopy[selectedAnecdote] + 1
+    setVotes(votescopy)
+  }
+
   return (
     <div>
       <h2>anecdotes</h2>
-      <Button text='random anecdote' handleClick={handleClick} />
+      <Button text='random anecdote' handleClick={handleClickRandom} />
+      <Button text='vote for current' handleClick={handleClickVote} />
       <p>{anecdotes[selectedAnecdote]}</p>
+      <p>{votes}</p>
     </div>
   )
 }

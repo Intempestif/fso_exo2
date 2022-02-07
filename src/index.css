@@ -73,3 +73,7 @@ code {
 .app table tbody tr td {
   padding: 0 .2rem;
 }
+
+.app button {
+  margin-right: .2rem;
+}
