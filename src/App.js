@@ -8,7 +8,19 @@ const Button = (props) => {
   )
 }
 
+const StatisticLine = ({ text, value, text2 }) => {
+  return (
+    <li>
+      {text} {value} {text2}
+    </li>
+  )
+}
+
 const Statistics = ({ good, neutral, bad }) => {
+  const round = (number) => {
+    return Math.round(number * 100) / 100
+  }
+
   if (good === 0 && neutral === 0 && bad === 0) {
     return (
       <div>
@@ -21,33 +33,16 @@ const Statistics = ({ good, neutral, bad }) => {
       <div>
         <h2>statistics</h2>
         <ul>
-          <li>good : {good}</li>
-          <li>neutral : {neutral}</li>
-          <li>bad : {bad}</li>
-          <li>all : {good + neutral + bad}</li>
-
-          <AveragePositive good={good} neutral={neutral} bad={bad} />
-
+          <StatisticLine text='good : ' value={good} />
+          <StatisticLine text='neutral : ' value={neutral} />
+          <StatisticLine text='bad : ' value={bad} />
+          <StatisticLine text='all :' value={good + neutral + bad} />
+          <StatisticLine text='average : ' value={round((good - bad) / (good + neutral + bad))} />
+          <StatisticLine text='positive : ' value={round(good / (good + neutral + bad) * 100)} text2=' %' />
         </ul>
       </div>
     )
   }
-}
-
-const AveragePositive = ({ good, neutral, bad }) => {
-
-  // fonction pour arrondir l'entrée
-  const round = (number) => {
-    return Math.round(number * 100) / 100
-  }
-
-  return (
-    <div>
-      <li>average : {round((good - bad) / (good + neutral + bad))}</li>
-      {/* calculer le pourcentage de vote à good avec deux chiffres après la virgule */}
-      <li>positive : {round(good / (good + neutral + bad) * 100)} %</li>
-    </div>
-  )
 }
 
 const App = () => {
