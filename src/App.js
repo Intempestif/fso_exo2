@@ -92,6 +92,8 @@ const Anecdotes = () => {
       <Button text='vote for current' handleClick={handleClickVote} />
       <p>{anecdotes[selectedAnecdote]}</p>
       <p>{votes}</p>
+      <h2>anecdote with most votes</h2>
+      <p>{anecdotes[votes.indexOf(Math.max(...votes))]}</p>
     </div>
   )
 }
