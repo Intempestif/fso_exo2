@@ -67,7 +67,7 @@ const Anecdotes = () => {
   const handleClickRandom = () => {
     const lastAnecdote = selectedAnecdote
     const randomNumber = Math.floor(Math.random() * 7)
-    if(randomNumber === lastAnecdote) {
+    if (randomNumber === lastAnecdote) {
       // générer nouveau numéro
       const randomNumber = Math.floor(Math.random() * 7)
       setSelectedAnecdote(randomNumber)
@@ -85,6 +85,41 @@ const Anecdotes = () => {
     setVotes(votescopy)
   }
 
+  {/* afficher l'anecdote avec le plus de votes, ne rien afficher si tout est à zéro et afficher tous les votes à égalité */ }
+  const mostVotes = () => {
+    let max = 0
+    let maxIndex = 0
+    let bool = false
+    for (let i = 0; i < votes.length; i++) {
+      if (votes[i] > max) {
+        max = votes[i]
+        maxIndex = i
+        bool = true
+      }
+    }
+    if(bool){
+      // check if there are more than 1 index with the value === max
+      let maxIndexes = []
+      for (let i = 0; i < votes.length; i++) {
+        if (votes[i] === max) {
+          maxIndexes.push(i)
+        }
+      }
+      if (maxIndexes.length > 1) {
+        bool = false
+      }
+    }
+    if(max === 0){
+      return "No votes"
+    }
+    else if(bool === false){
+      return "there are at least two anecdotes with the same number of votes"
+    }
+    else {
+      return anecdotes[maxIndex]
+    }
+  } 
+
   return (
     <div>
       <h2>anecdotes</h2>
@@ -93,7 +128,7 @@ const Anecdotes = () => {
       <p>{anecdotes[selectedAnecdote]}</p>
       <p>{votes}</p>
       <h2>anecdote with most votes</h2>
-      <p>{anecdotes[votes.indexOf(Math.max(...votes))]}</p>
+      <p>{mostVotes()}</p>
     </div>
   )
 }
